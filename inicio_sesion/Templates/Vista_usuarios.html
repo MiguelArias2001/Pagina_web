@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'vendors/themify-icons/css/themify-icons.css'%}">
+    <link rel="stylesheet" href="{%static 'css/Style_Admin.css'%}">
+    <!-- Enlaces a los archivos CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    {% csrf_token %}
+    <div class="container">
+        <div class="row row-cols-3">
+            <div class="col">
+                <form method="post" action="{%url 'busca_nombre'%}">
+                    <div class="input-group">
+                        <input type="text" pattern="[^\d]+" title="No se permiten números" class="form-control" placeholder="Nombre" name="bus_nom">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Nombre</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+                <form method="post" action="{%url 'busca_code'%}">
+                    <div class="input-group">
+                        <input type="number" class="form-control" placeholder="Código" name="bus_cod">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Código</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+                <form method="post" action="{%url 'busca_filter'%}">
+                    <div class="row">
+                        <div class="col">
+                            <select class="custom-select form-row" name="opcion" onchange="this.form.submit()">
+                                <option selected>Seleccione una opción</option>
+                                <option value="fecha">Fecha</option>
+                                <option value="nombre">Nombre</option>
+                                <option value="codigo">Código</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <label class="btn btn-primary" for="btnradio1">
+                                    <input type="radio" class="btn-check" name="Opciones" id="btnradio1" value="Activo" autocomplete="off">
+                                    Activo
+                                </label>
+                                <label class="btn btn-primary" for="btnradio2">
+                                    <input type="radio" class="btn-check" name="Opciones" id="btnradio2" value="Inactivo" autocomplete="off">
+                                    Inactivo
+                                </label>
+                                <label class="btn btn-primary" for="btnradio3">
+                                    <input type="radio" class="btn-check" name="Opciones" id="btnradio3" value="Todo" autocomplete="off" checked>
+                                    Todos
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                {% for usuario in usuarios %}
+                <div class="card card-white">
+                    <div class="card-header bg-light text-dark d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">Información de usuario</h5>
+                        {% if usuario.activo == 1 %}
+                        <i class="ti-user card-header-icon text-success"></i>
+                        {% else %}
+                        <i class="ti-user card-header-icon text-secondary"></i>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 d-flex align-items-center justify-content-center">
+                                <img src="{%static 'imgs/Avatar.png'%}" class="circular--profile" alt="Imagen">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-text">Código: {{usuario.codigo}}</div>
+                                <div class="card-text">Nombre: {{usuario.nombre}}</div>
+                                <div class="card-text">Correo: {{usuario.email}}</div>
+                                <div class="card-text">Fecha de creación: {{usuario.fecha}}</div>
+                            </div>
+                            <div class="col-md-3">
+                                <form method="get" action="{%url 'delete_user'%}">
+                                    <input type="hidden" name="codigo" value="{{usuario.codigo}}">
+                                    <button class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Enlaces a los archivos JavaScript de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+<script>
+    $(document).ready(function () {
+        $('#activoSwitch').on('change', function () {
+            var form = $('#switchForm');
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: form.serialize()
+            });
+        });
+    });
+</script>
+
+</html>

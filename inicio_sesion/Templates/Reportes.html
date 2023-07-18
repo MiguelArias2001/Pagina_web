@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reportes</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{%static 'vendors/themify-icons/css/themify-icons.css'%}">
+  <link rel="stylesheet" href="{%static 'css/Style_Admin.css'%}">
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card card-register">
+          <div class="card-body">
+            <h5 class="card-title card-title-register">
+              <span class="card-icon ti-user"></span>
+              <span class="card-number">{{registro.0}}</span>
+              Cantidad de usuarios activos
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-register">
+          <div class="card-body">
+            <h5 class="card-title card-title-register">
+              <span class="card-icon ti-user"></span>
+              <span class="card-number">{{registro.1}}</span>
+              Cantidad de usuarios inactivos
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-register">
+          <div class="card-body">
+            <h5 class="card-title card-title-register">
+              <span class="card-icon ti-comment"></span>
+              <span class="card-number">{{registro.3}}</span>
+              Cantidad de Temas de Conversacion
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-register">
+          <div class="card-body">
+            <h5 class="card-title card-title-register">
+              <span class="card-icon ti-file"></span>
+              <span class="card-number">{{registro.2}}</span>
+              Cantidad de archivos
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container d-flex flex-column align-items-center justify-content-center vh-100 text-center">
+    <h1>Grafico de Registros realizados por mes</h1>
+    <img src="data:image/png;base64,{{ chart }}" alt="Gráfico">
+    <button onclick="printPage()" class="btn btn-primary">Imprimir</button>
+  </div>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+<script>
+  function printPage() {
+    window.print();
+  }
+</script>
+</html>

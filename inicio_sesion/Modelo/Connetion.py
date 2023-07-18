@@ -6,12 +6,15 @@ class Connection:
     _instance = None
 
     def __init__(self):
+
+        self.conn = None
+
         if Connection._instance != None:
             raise Exception("La coneccion ya esta en uso")
         else:
             try:
                 config = configdb.ConfigParser()
-                config.read('Modulo1/login_Page/inicio_sesion/Modelo/config.ini')
+                config.read('login_Page/inicio_sesion/Modelo/config.ini')
                 print(config.sections())
                 Connection._instance = self
                 mysql_config = config['MySQL']
@@ -44,10 +47,32 @@ class Connection:
         if self.conn.is_connected() == False:
              self.conn.reconnect()
         cursor = self.conn.cursor(buffered=True)
+        print(cursor)
         try:
             cursor.execute(query, params, multi=True)
             print(cursor)
             result = cursor.fetchone()
+            print(result)
+        except Error as err:
+            print(err)
+            result = None
+        finally:
+            cursor.close()
+            self.conn.close()
+        return result
+    
+    def execute_querys(self, query: str, params: tuple):
+        if not self.conn:
+            raise Exception("La conexión a la base de datos no se ha establecido correctamente.")
+        if self.conn.is_connected() == False:
+             self.conn.reconnect()
+        cursor = self.conn.cursor(buffered=True)
+        print(cursor)
+        try:
+            cursor.execute(query, params, multi=True)
+            print(cursor)
+            result = cursor.fetchall()
+            print(result)
         except Error as err:
             print(err)
             result = None

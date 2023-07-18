@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Archivos</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{%static 'css/Style_Admin.css'%}">
+</head>
+<body>
+    {% csrf_token %}
+    <div class="container">
+        <form action="{% url 'carga_archivo'%}" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <input type="text" class="form-control" placeholder="Nombre del Archivo" name="Nombre_a">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <textarea class="form-control" rows="4" placeholder="Descripcion del archivo" name="Descripcion_a"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <input type="file" class="form-control-file mb-3" name="archivo">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-3 text-center">
+                    <button type="submit" class="btn btn-primary">Cargar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="border-top"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center">
+                <form action="{% url 'filtro_archivo' %}" method="post">
+                    <select class="form-control custom-select" name="status" onchange="this.form.submit()">
+                        <option value="Todo">Todo</option>
+                        <option value="leido">Leido</option>
+                        <option value="no-leido">No Leído</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for archi in arch %}
+            <div class="col">
+                <div class="card text-bg-dark">
+                    <img src="{%static 'imgs/PDF.png'%}" class="card-img-top" alt="Image 1">
+                    <div class="card-img-overlay">
+                        <h5 class="title-overlay">{{archi.Nombre}}</h5>
+                        <p class="title-overlay">{{archi.descripcion}}</p>
+                        {% if archi.leido == 0%}
+                        <form action="{% url 'actualiza_archivo'%}" method="post">
+                            <input type="hidden" name="codigo" value="{{archi.id}}">
+                            <button type="submit" class="btn btn-primary">Marcar como leído</button>
+                        </form>
+                        {% endif %}
+                        <form action="{% url 'eliminar_archivo' %}" method="post">
+                            <input type="hidden" name="codigo" value="{{archi.id}}">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

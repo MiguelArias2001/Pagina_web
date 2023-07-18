@@ -1,0 +1,183 @@
+:root {
+    --primary: #8C1919 !important;
+    --secondary: #6c757d !important;
+    --background: #292929 !important;
+    --text: #ffffff !important;
+    --rojo-principal: #8C1919 !important;
+    --rojo-oscuro: #A93A3A !important;
+    --rojo-medio: #C45F5F !important;
+    --rojo-claro: #DF8282 !important;
+    --gris-principal: #6c757d !important;
+    --gris-medio: #838C92 !important;
+    --gris-claro: #9BA2A9 !important;
+    --gris-muy-claro: #B5BDC4 !important;
+    --gris-ultra-claro: #CED6DC !important;
+    --danger: #A95353 !important;
+  }
+  
+  body {
+    background-color: var(--background) !important;
+    color: var(--text) !important;
+  }
+  
+  .centered-button {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100% !important;
+  }
+  
+  .card-header-icon {
+    text-align: right !important;
+  }
+  
+  .card {
+    background-color: var(--text) !important;
+    border-color: var(--rojo-principal) !important;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+  }
+  
+  .card-header {
+    background-color: var(--gris-claro) !important;
+    color: var(--text) !important;
+    border-bottom: 1px solid var(--rojo-principal) !important;
+  }
+  
+  .card-primary {
+    background-color: var(--rojo-principal) !important;
+    color: var(--text) !important;
+  }
+  
+  .card-secondary {
+    background-color: var(--gris-principal) !important;
+    color: var(--text) !important;
+  }
+  
+  .card-white {
+    background-color: #fff !important;
+    color: black !important;
+  }
+  
+  .btn-primary,
+  .btn-secondary,
+  .custom-select {
+    background-color: var(--rojo-principal) !important;
+    border-color: var(--rojo-principal) !important;
+    color: var(--text) !important;
+  }
+  
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .custom-select:hover,
+  .custom-select:focus {
+    background-color: var(--rojo-oscuro) !important;
+    border-color: var(--rojo-oscuro) !important;
+    color: var(--text) !important;
+  }
+  
+  .btn-primary:focus,
+  .btn-secondary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(140, 25, 25, 0.5) !important;
+    background-color: var(--rojo-oscuro) !important;
+    border-color: var(--rojo-oscuro) !important;
+    color: var(--text) !important;
+  }
+  
+  .btn-primary:active,
+  .btn-secondary:active {
+    background-color: var(--rojo-oscuro) !important;
+    border-color: var(--rojo-oscuro) !important;
+    color: var(--text) !important;
+  }
+  
+  .btn-danger {
+    background-color: var(--danger) !important;
+    border-color: var(--danger) !important;
+    color: var(--text) !important;
+  }
+  
+  .btn-danger:hover,
+  .btn-danger:focus {
+    background-color: var(--rojo-medio) !important;
+    border-color: var(--rojo-medio) !important;
+    color: var(--text) !important;
+  }
+  
+  .btn-danger:active {
+    background-color: var(--rojo-oscuro) !important;
+    border-color: var(--rojo-oscuro) !important;
+    color: var(--text) !important;
+  }
+  
+  .card-img-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    padding: 1rem !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    color: white !important;
+  }
+  
+  .card-title,
+  .card-text {
+    color: black !important;
+    
+  }
+  
+  .card-register {
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .card-title-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+  }
+  
+  .card-icon {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  
+  .card-number {
+    font-size: 36px;
+    font-weight: bold;
+  }
+  
+  .custom-container {
+    width: calc(100% - 30px) !important;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100vh !important;
+    text-align: center !important;
+  }
+
+  .title-overlay{
+    color: #fff !important;
+  }
+
+  .circular--profile {
+    border-radius: 70% !important;
+    width: 150px !important;
+    height: 150px !important;
+    object-fit: cover !important;
+    border: 2px solid #8C1919 !important;
+  }
+
+  input[type="radio"]:checked::before {
+    appearance: none !important;
+    color: var(--rojo-principal) !important;
+    background-color: var(--rojo-principal) !important;
+  }
